@@ -47,7 +47,8 @@ cdh_config ()
     tuned-adm list
     systemctl stop tuned
     systemctl disable tuned
-    curl -o /etc/default/grub http://10.255.188.206/pub/conf/grub
+    #curl -o /etc/default/grub http://10.255.188.206/pub/conf/grub
+    /usr/bin/cp -f hadoop-tests/conf/grub /etc/default/grub
     grub2-mkconfig -o /boot/grub2/grub.cfg
     printf "vm.swappiness=1\n" >> /etc/sysctl.conf
     printf "vm.vfs_cache_pressure=200\nvm.min_free_kbytes=5242880\n" >> /etc/sysctl.conf
