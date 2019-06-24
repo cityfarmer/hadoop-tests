@@ -12,6 +12,7 @@ log="$logdir/teragen.log.${selinux}.${dstamp}"
 cleanup () {
     hadoop fs -rm -r -f -skipTrash $1
     hadoop fs -rm -r -f -skipTrash $2
+    hadoop fs -rm -r -f -skipTrash $3
 }
 
 info () {
@@ -54,19 +55,21 @@ case "$1" in
     ;;
   "-val")
     info "start" "3" "Teravalidate"
+    tgoutput="TS_input_${jobs}_default"
     tsoutput="TS_output_${jobs}_default"
     tvoutput="TV_output_${jobs}_default"
     { time hadoop jar ${libpath}/hadoop-mapreduce-examples.jar teravalidate $tsoutput $tvoutput ; } >> $log 2>&1
     info "end" "3" "Teravalidate"
-    cleanup $tsoutput $tvoutput >> $log 2>&1
+    cleanup $tgoutput $tsoutput $tvoutput >> $log 2>&1
     ;;
   "-val1")
     info "start" "1" "Teravalidate"
+    tgoutput="TS_input_${jobs}_1"
     tsoutput="TS_output_${jobs}_1"
     tvoutput="TV_output_${jobs}_1"
     { time hadoop jar ${libpath}/hadoop-mapreduce-examples.jar teravalidate $tsoutput $tvoutput ; } >> $log 2>&1
     info "end" "1" "Teravalidate"
-    cleanup $tsoutput $tvoutput >> $log 2>&1
+    cleanup $tgoutput $tsoutput $tvoutput >> $log 2>&1
     ;;
    *)
     echo "Usage:./teragen.sh { -gen (teragen) | -gen1 (teragen rep1) | -sort (terasort) | -sort1 (terasort rep1) } { <num of jobs> } ex: ./teragen.sh -gen 12 "
