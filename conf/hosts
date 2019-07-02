@@ -9,3 +9,7 @@
 10.255.109.26 in-worker01
 10.255.109.27 in-worker02
 10.255.109.28 in-worker03
+10.255.109.45 ci-master01
+10.255.109.46 ci-worker01
+10.255.109.47 ci-worker02
+10.255.109.48 ci-worker03
